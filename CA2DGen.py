@@ -11,9 +11,11 @@ import numpy as np
 #-1 is padding
 #Here is where we'll put test cases
 #Tests are of the form, init, desired, time
-individualSize =  832 #2-d Case
+#individualSize =  832 #2-d Case
 #individualSize = 99
 #individualSize = 56 
+#individualSize = 248
+individualSize = 128
 def GenerateMatrix(dim1,dim2):
     gen = np.zeros((dim1+2,dim2+2),np.int8)
     for i in range(0,dim1+2):
@@ -39,7 +41,7 @@ Tests.append((np.array([[-1,-1,-1,-1,-1,-1,-1],[-1,0,0,1,0,0,-1],[-1,0,0,1,0,0,-
 Tests.append((GenerateMatrix(5,5),300,5,5))
 Tests.append((GenerateMatrix(5,5),300,5,5))
 Tests.append((GenerateMatrix(5,5),300,5,5))
-#Tests.append((GenerateMatrix(10,10),500,10,10))
+Tests.append((GenerateMatrix(10,10),500,10,10))
 #Tests.append((GenerateMatrix(20,20),1000,20,20))
 #Tests.append((GenerateMatrix(30,30),5000,30,30))
 #Tests.append((GenerateMatrix(100,100),100000,5,5))
@@ -50,6 +52,9 @@ BestCurrent2 = [0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1
 BestCurrent3 = [ 0  ,    1,     1,     1,      0,      0,      0,      0,       0,         1,     1,     1,      1,     1,       1 ,   1,      0,     1,      1,      1,     1,       1,      1    ,   1,     0,        1,      1      , 1,      1,      1,     1,      1,                0,    1,       0,    0,   0,    1,    1,     1,   0,    1,     1,    1,   0,    1,   1,   1,              0,     1,   1,   1,  1,   1,   1,   1]
 #               00000   00001  00010  00011   00100   00101   00110   00111   01000     01001    01010  01011   01100  01101  01110  01111    10000  10001   10010   10011  10100    10101    10110   10111   11000  11001    11010     11011   11100   11101  11110   11111 (end of 5) 0000    0001    0010  0011 0100  0101  0110  0111  1000 1001   1010  1011 1100 1101 1110 1111 (end of 4)  000   001   010  011  100  101  110  111
 #best three works
+#BestCut = [0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0]
+BestCurrent5 = [0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1]
+#Apparently works (doesn't)
 def RunTwoDCA(Init,Rule,time, shouldPrint,printEnd, dim1, dim2):
     Current = Init
     if printEnd:
@@ -58,7 +63,7 @@ def RunTwoDCA(Init,Rule,time, shouldPrint,printEnd, dim1, dim2):
     for i in range(0,time):
         for k in range(1,dim1+1):
             for j in range(1,dim2+1): #We'll need some gap to make it easier
-                Next[k][j] = RunRule2d(createlistfrommatrix(k,j,Current),Rule)
+                Next[k][j] = RestrictedRunRule2D2(createlistfrommatrix(k,j,Current),Rule)
         if shouldPrint:
             print(Next)
             print(i)
@@ -117,16 +122,40 @@ def RestrictedRunRule2D(c,Rule):
     #print(c)
     if c[3] == -1:
         if c[1] == -1:
-            return Rule[(2**4 + +2**5 + convert32ToRule(c))]
+            return Rule[(48 + convert32ToRule(c))]
         elif c[7] == -1:
-            return Rule[(2**5 +convert4ToRule(c))]
+            return Rule[(32 +convert4ToRule(c))]
         else:
             return Rule[(convert5ToRule(c))]
     elif c[5] == -1: 
         return BestGuess[12 + convert2ToRule(c[3],c[4])]
     else:
         return BestGuess[4+convert3ToRule(c)]
-            
+
+def RestrictedRunRule2D2(c,Rule):
+    #print(c)
+    if c[3] == -1:
+        if c[1] == -1:
+            return BestCurrent3[(48 + convert32ToRule(c))]
+        elif c[7] == -1:
+            return BestCurrent3[(32 +convert4ToRule(c))]
+        else:
+            return BestCurrent3[(convert5ToRule(c))]
+    elif c[5] == -1: 
+        if c[7] == -1:
+            return BottomRightRule[convert33ToRule(c)]
+        elif c[1] == -1:
+            return TopRightRule[convert44ToRule(c)]
+        else:
+            return RightEdgeRule[convert55ToRule(c)]
+    elif c[7] == -1:
+        return BottomEdgeRule[convert52ToRule(c)]
+    elif c[1] == -1:
+        return TopEdgeRule[convert54ToRule(c)]
+    else:
+        return Rule[convert7ToRule(c)]
+
+
 def convert3ToRule(c):
     return c[3] * 4 + c[4] * 2 + c[5] * 1
 
@@ -141,7 +170,42 @@ def convert32ToRule(c):
 def convert5ToRule(c):
     return c[1]*16 + c[2] * 8 + c[4] * 4 + c[5] * 2 + c[7]
 
+#restriced 2 rules
 
+def convert33ToRule(c):
+    return c[1] * 4 + c[3]*2 + c[4]
+BottomRightRule = [0,  0,  0   ,  0 ,  0  , 0   ,0 ,1]
+###               000 001  010   011 100  101   110 111
+
+
+def convert52ToRule(c):
+    return c[1]*16 + c[2] * 8 + c[3]* 4 + c[4]*2 + c[5]
+BottomEdgeRule = [0  ,    1   ,  0,      0   , 0,     1  ,    0        ,0,       0,    1,     0,      0   ,  0   ,  1,     1,   1,     0,    1     , 0,     0     ,  0,    1,     1,      1,     0,     1,   0,       0  ,   0,    1,    1,    1]
+#####          00000  00001   00010   00011 00100  00101     00110    00111  01000   01001  01010  01011   01100  01101 01110  01111 10000  10001   10010  10011   10100  10101  10110   10111  11000 11001 11010   11011   11100 11101 11110  11111                                       
+def convert54ToRule(c):
+    return c[3]*16 + c[4] * 8 + c[5]* 4 + c[6]*2 + c[7]
+TopEdgeRule = [0  ,    0   ,  0,        1   , 1,     1  ,      1        ,1,       0,    0,     0,      0   ,  0   ,  0,     0,     0,     0,      0     , 0,     1     ,  1,    1,     1,      1,     1,     1,   1,       1  ,    1,    1,    1,    1]
+#####          00000  00001   00010   00011 00100  00101     00110    00111    01000   01001  01010  01011   01100  01101 01110  01111   10000  10001   10010  10011   10100  10101  10110   10111  11000 11001 11010   11011   11100 11101 11110  11111                                       
+def convert55ToRule(c):
+    return c[1]*16 + c[3] * 8 + c[4]* 4 + c[6]*2 + c[7]
+RightEdgeRule = [0  ,    0   ,  0,      1   , 0,     0  ,    0        ,0,       0,    0,     0,      1   ,  0   ,  0,      0,   0,     0,    0     , 0,     1     ,  0,    0,     0,      0,     0,     0,   0,       1  ,   1,    1,    1,    1]
+#####          00000  00001   00010   00011 00100  00101     00110    00111  01000   01001  01010  01011   01100  01101 01110  01111 10000  10001   10010  10011   10100  10101  10110   10111  11000 11001 11010   11011   11100 11101 11110  11111                                       
+def convert42ToRule(c):
+    return c[1]*8  + c[2]*4 + c[4] * 2 + c[7]
+
+
+
+def convert7ToRule(c):
+    return c[1]*64 + c[2]*32 + c[3] * 16 + c[4] * 8 + c[5] * 4 + c[6] *2 + c[7] 
+#MiddlePackRule = []
+########          
+def convert44ToRule(c):
+    return c[3] * 8 + c[4]*4 +c[6]*2 + c[7]
+
+TopRightRule = [0 ,   0,       0 ,   1    , 0   ,   0,     0,    0,       0   ,  0    ,0  , 1  ,  1,    1   ,   1 ,    1 ]
+####           0000  0001   0010   0011    0100    0101   0110  0111    1000   1001  1010   1011   1100  1101    1110   1111
+
+#end
 def mazeSearch(matrix,x,y,value,newvalue):
     #print(matrix)
     #print(x,y)
@@ -288,7 +352,6 @@ def main():
     # create an initial population of 300 individuals (where
     # each individual is a list of integers)
     pop = toolbox.population(n=300)
-
     # CXPB  is the probability with which two individuals
     #       are crossed
     #
@@ -372,6 +435,6 @@ def main():
     evalOneMax(best_ind)
     endingProof(best_ind)
 if __name__ == "__main__":
-    #endingProof(BestCurrent3)
+    #endingProof(BestCurrent5)
     main()
     
