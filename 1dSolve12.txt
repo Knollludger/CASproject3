@@ -1,4 +1,4 @@
-W,B,B,B,W,W,W,W,W,W,
-B,W,B,B,W,W,W,W,W,W,
-B,B,W,B,W,W,W,W,W,W,
-B,B,B,W,W,W,W,W,W,W,
+W,B,B,B,W,W,W,W,W,W
+B,W,B,B,W,W,W,W,W,W
+B,B,W,B,W,W,W,W,W,W
+B,B,B,W,W,W,W,W,W,W

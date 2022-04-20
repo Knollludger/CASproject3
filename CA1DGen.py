@@ -49,7 +49,7 @@ def RunOneDCA(Init,DesiredResults,Rule,time, shouldPrint,printEnd):
 def write2File(Current):
     f = open("1dSolve" + str(len(Current)) + ".txt","a")
     for i in range(1,len(Current) -1):
-        if i == len(Current) -1:
+        if i == len(Current) -2:
             if Current[i]:
                 f.write("B")
             else: f.write("W")
