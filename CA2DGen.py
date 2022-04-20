@@ -1,6 +1,8 @@
 from copy import copy, deepcopy
+from glob import glob
 from msilib.schema import Binary
 import random
+import matplotlib
 from scipy import spatial
 from deap import base
 from deap import creator
@@ -8,6 +10,24 @@ from deap import tools
 from sympy import false, true
 import numpy as np
 import sys
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+def my_func(i):
+    global dim1anime
+    global dim2anime
+    global animeBae
+    Next = deepcopy(animeBae)
+    
+    for k in range(1,dim1anime+1):
+        for j in range(1,dim2anime+1): #We'll need some gap to make it easier
+            Next[k][j] = RestrictedRunRule2D2(createlistfrommatrix(k,j,animeBae),BestCurrent6)
+    
+    animeBae = deepcopy(Next)
+    im.set_data(animeBae)
+
+
+
 #1100000000011
 #-1 is padding
 #Here is where we'll put test cases
@@ -467,7 +487,36 @@ def main():
 if __name__ == "__main__":
     np.set_printoptions(threshold=sys.maxsize,linewidth=100*100)
     sys.setrecursionlimit(101*101)
-    endingProof(BestCurrent6)
-    
+    #endingProof(BestCurrent6)
+    global animeBae
+    global dim1anime
+    global dim2anime
+    global im
+    dim1anime = 100
+    dim2anime = 100
+    animeBae = GenerateMatrix(dim1anime,dim2anime)
+    fig = plt.figure( figsize=(8,8) )
+    im = plt.imshow(animeBae,
+                interpolation="none",
+                cmap='gist_yarg',
+                vmin = -1,
+                vmax = 1)
+    grid_kws = {'width_ratios': (0.9, 0.05), 'wspace': 0.2}
+    anim = FuncAnimation(fig = fig, func = my_func, frames = 208, interval = 50, blit = False)
+
+    plt.show()
+
     #main()
+
+
+
+
+
+
+
+    
+    
+        
+    
+    
     
