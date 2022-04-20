@@ -12,13 +12,13 @@ individualSize = 16 #2-d Case
 #individualSize = 99
 
 Tests = []
-Tests.append(([-1,0,0,0,0,0,0,0,0,0,-1],[-1,0,0,0,0,0,0,0,0,0,-1],3))
-Tests.append(([-1,1,1,1,1,0,0,0,0,-1],[-1,1,1,1,1,0,0,0,0,-1], 3))
-Tests.append(([-1,1,1,1,1,1,1,1,1,1,-1],[-1,1,1,1,1,1,1,1,1,1,-1],3))
-Tests.append(([-1,0,1,1,0,0,1,0,1,-1],[-1,1,1,1,1,0,0,0,0,-1], 100))
-Tests.append(([-1,0,1,1,0,0,1,1,0,-1],[-1,1,1,1,1,0,0,0,0,-1], 100))
-Tests.append(([-1,0,1,1,1,0,0,0,0,-1],[-1,1,1,1,0,0,0,0,0,-1], 100))
-Tests.append(([-1,0,1,0,1,0,1,0,1,-1],[-1,1,1,1,1,0,0,0,0,-1], 200))
+#Tests.append(([-1,0,0,0,0,0,0,0,0,0,-1],[-1,0,0,0,0,0,0,0,0,0,-1],3))
+#Tests.append(([-1,1,1,1,1,0,0,0,0,-1],[-1,1,1,1,1,0,0,0,0,-1], 3))
+#Tests.append(([-1,1,1,1,1,1,1,1,1,1,-1],[-1,1,1,1,1,1,1,1,1,1,-1],3))
+#Tests.append(([-1,0,1,1,0,0,1,0,1,-1],[-1,1,1,1,1,0,0,0,0,-1], 100))
+#Tests.append(([-1,0,1,1,0,0,1,1,0,-1],[-1,1,1,1,1,0,0,0,0,-1], 100))
+Tests.append(([-1,0,1,1,1,0,0,0,0,0,0,-1],[-1,1,1,1,0,0,0,0,0,0,0,-1], 100))
+Tests.append(([-1,0,1,0,1,0,1,0,1,1,-1],[-1,1,1,1,1,1,0,0,0,0,-1], 200))
 Tests.append(([-1,0,0,0,0,1,1,1,1,-1],[-1,1,1,1,1,0,0,0,0,-1], 300))
 # Tests.append(([-1,2,2,2,2,1,1,1,1,-1],[-1,1,1,1,1,2,2,2,2,-1], 300))
 # Tests.append(([-1,0,1,2,1,0,1,0,1,-1],[-1,1,1,1,1,2,0,0,0,-1], 200))
@@ -35,6 +35,7 @@ def RunOneDCA(Init,DesiredResults,Rule,time, shouldPrint,printEnd):
             Next[j] = RunRule(Current[j-1],Current[j],Current[j+1],Rule)
         if shouldPrint:
             print(Next)
+            write2File(Current)
         if Next == Current:
             break
         else:
@@ -44,7 +45,23 @@ def RunOneDCA(Init,DesiredResults,Rule,time, shouldPrint,printEnd):
         print(Next)
     return -(spatial.distance.hamming(DesiredResults,Next))
 
-BestGuess = [0   ,   1,   1,    1,   0,   1,     0,    0,    0,    1,   1,    1,    0,    0,    0  ,  1] #Matts Rule
+
+def write2File(Current):
+    f = open("1dSolve" + str(len(Current)) + ".txt","a")
+    for i in range(1,len(Current) -1):
+        if i == len(Current) -1:
+            if Current[i]:
+                f.write("B")
+            else: f.write("W")
+            break
+        if Current[i]:
+            f.write("B,")
+        else: f.write("W,")
+    f.write("\n")
+    f.close()
+
+
+BestGuess = [0   ,   1,   1,    1,   0,   1,     0,    0,    0,    1,   1,    1,    0,    0,    0  ,  1] #Timms Rule
 #           00       01    10   11   000  001    010   011   100  101  110    111   00    01    10    11
 def RunRule(c1,c2,c3,Rule):
     #print(c1,c2,c3)
@@ -98,7 +115,7 @@ def evalOneMax(individual):
 def endingProof(individual):
     testTotal = 0
     for i in Tests:
-        testTotal += RunOneDCA(i[0],i[1],individual,i[2],False,True)
+        testTotal += RunOneDCA(i[0],i[1],individual,i[2],True,True)
     
     return testTotal,
 
@@ -214,6 +231,6 @@ def main():
     endingProof(best_ind)
 if __name__ == "__main__":
     endingProof(BestGuess)
-    main()
+    #main()
     
 

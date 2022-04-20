@@ -28,22 +28,22 @@ def GenerateMatrix(dim1,dim2):
     return gen
 
 Tests=[]
-Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,1,1,1,-1],[-1,1,1,1,-1],[-1,1,1,1,-1],[-1,-1,-1,-1,-1]]),3,3,3))
-Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,0,0,0,-1],[-1,0,0,0,-1],[-1,0,0,0,-1],[-1,-1,-1,-1,-1]]),3,3,3))
-Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,1,0,1,-1],[-1,0,0,0,-1],[-1,1,0,1,-1],[-1,-1,-1,-1,-1]]),50,3,3))
-Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,0,1,0,-1],[-1,0,1,0,-1],[-1,0,1,0,-1],[-1,-1,-1,-1,-1]]),50,3,3))
-Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,0,0,0,-1],[-1,0,0,0,-1],[-1,1,1,1,-1],[-1,-1,-1,-1,-1]]),50,3,3))
-Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,0,0,1,-1],[-1,0,0,1,-1],[-1,0,0,1,-1],[-1,-1,-1,-1,-1]]),50,3,3))
-Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,1,1,1,-1],[-1,0,0,0,-1],[-1,0,0,0,-1],[-1,-1,-1,-1,-1]]),50,3,3))
-Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,1,0,0,-1],[-1,0,0,0,-1],[-1,0,0,0,-1],[-1,-1,-1,-1,-1]]),50,3,3))
+#Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,1,1,1,-1],[-1,1,1,1,-1],[-1,1,1,1,-1],[-1,-1,-1,-1,-1]]),3,3,3))
+#Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,0,0,0,-1],[-1,0,0,0,-1],[-1,0,0,0,-1],[-1,-1,-1,-1,-1]]),3,3,3))
+#Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,1,0,1,-1],[-1,0,0,0,-1],[-1,1,0,1,-1],[-1,-1,-1,-1,-1]]),50,3,3))
+#Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,0,1,0,-1],[-1,0,1,0,-1],[-1,0,1,0,-1],[-1,-1,-1,-1,-1]]),50,3,3))
+#Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,0,0,0,-1],[-1,0,0,0,-1],[-1,1,1,1,-1],[-1,-1,-1,-1,-1]]),50,3,3))
+#Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,0,0,1,-1],[-1,0,0,1,-1],[-1,0,0,1,-1],[-1,-1,-1,-1,-1]]),50,3,3))
+#Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,1,1,1,-1],[-1,0,0,0,-1],[-1,0,0,0,-1],[-1,-1,-1,-1,-1]]),50,3,3))
+#Tests.append((np.array([[-1,-1,-1,-1,-1],[-1,1,0,0,-1],[-1,0,0,0,-1],[-1,0,0,0,-1],[-1,-1,-1,-1,-1]]),50,3,3))
 Tests.append((np.array([[-1,-1,-1,-1,-1,-1,-1],[-1,1,1,0,1,1,-1],[-1,1,1,0,1,1,-1],[-1,0,0,0,0,0,-1],[-1,1,1,0,1,1,-1],[-1,1,1,0,1,1,-1],[-1,-1,-1,-1,-1,-1,-1]]),300,5,5))
 Tests.append((np.array([[-1,-1,-1,-1,-1,-1,-1],[-1,0,0,1,0,0,-1],[-1,0,0,1,0,0,-1],[-1,1,1,1,1,1,-1],[-1,0,0,1,0,0,-1],[-1,0,0,1,0,0,-1],[-1,-1,-1,-1,-1,-1,-1]]),300,5,5))
 #end of basic tests
 #Tests.append((GenerateMatrix(5,5),300,5,5))
 #Tests.append((GenerateMatrix(5,5),300,5,5))
 #Tests.append((GenerateMatrix(5,5),300,5,5))
-#Tests.append((GenerateMatrix(10,10),500,10,10))
-#Tests.append((GenerateMatrix(20,20),1000,20,20))
+Tests.append((GenerateMatrix(10,10),500,10,10))
+Tests.append((GenerateMatrix(20,20),1000,20,20))
 Tests.append((GenerateMatrix(100,100),5000,100,100))
 
 #Tests.append((GenerateMatrix(50,50),100000,50,50))
@@ -59,8 +59,22 @@ BestCurrent5 = [0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1
 BestCurrent6 = [0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1]
 #######
 
+def writestepToFile(Next,dim1,dim2):
+    f = open("runMatrix" + str(dim1) + "x" + str(dim2) + ".txt",'a')
+    for k in range(1,dim1+1):
+        for j in range(1,dim2+1):
+            if Next[k,j]:
+                f.write("B")
+            else: f.write("W")
+            if not j == dim2:
+                f.write(",")
+        if  not k == dim1: f.write("\n")
+    f.write(":\n")
+    f.close()
 
-def RunTwoDCA(Init,Rule,time, shouldPrint,printEnd, dim1, dim2):
+
+
+def RunTwoDCA(Init,Rule,time, shouldPrint,printEnd, dim1, dim2,write2File):
     Current = Init
     if printEnd:
         print(Init)
@@ -73,6 +87,8 @@ def RunTwoDCA(Init,Rule,time, shouldPrint,printEnd, dim1, dim2):
             print(Next)
             print(i)
             #checker(deepcopy(Init),deepcopy(Next),dim1,dim2)
+        if write2File:
+            writestepToFile(Current,dim1,dim2)
         if np.array_equal(Next,Current):
             break
         else:
@@ -324,14 +340,14 @@ toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 def evalOneMax(individual):
     testTotal = 0
     for i in Tests:
-        testTotal += RunTwoDCA(i[0],individual,i[1],False,False,i[2],i[3])
+        testTotal += RunTwoDCA(i[0],individual,i[1],False,False,i[2],i[3],False)
     
     return testTotal,
 
 def endingProof(individual):
     testTotal = 0
     for i in Tests:
-        testTotal += RunTwoDCA(i[0],individual,i[1],True,True,i[2],i[3])
+        testTotal += RunTwoDCA(i[0],individual,i[1],True,True,i[2],i[3],True)
         if not testTotal == 0:
             break
         
