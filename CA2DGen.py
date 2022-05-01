@@ -14,6 +14,8 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 def my_func(i):
+    if i < 100:
+        return
     global dim1anime
     global dim2anime
     global animeBae
@@ -502,7 +504,7 @@ if __name__ == "__main__":
                 vmin = -1,
                 vmax = 1)
     grid_kws = {'width_ratios': (0.9, 0.05), 'wspace': 0.2}
-    anim = FuncAnimation(fig = fig, func = my_func, frames = 208, interval = 50, blit = False)
+    anim = FuncAnimation(fig = fig, func = my_func, frames = 400, interval = 50, blit = False)
 
     plt.show()
 
